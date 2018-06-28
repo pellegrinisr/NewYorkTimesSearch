@@ -31,7 +31,14 @@ $(document).ready(function() {
         $.getJSON(queryURL).then(function(response) {
             //create new div to hold each article result
             console.log(response);
-        })
+            var newArticleDiv = $('<div>').addClass('article-addition');
+            for (var i = 0; i < response.response.docs.length; i++) {
+                var headlineP = $('<p>');
+                headlineP.html(response.response.docs[i].headline.main);
+                newArticleDiv.append(headlineP);
+            }
+            $('.search-results').append(newArticleDiv);
+        });
     }
 
     $(document).on('click', '.search-button', getSearchTerms);
