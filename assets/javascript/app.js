@@ -4,19 +4,6 @@ $(document).ready(function() {
     var serarchTerm;
     var numRecords;
     function getSearchTerms() {
-        // console.log('.search-term' + $('.search-term').val());
-        // //check search term
-        // if ($('.search-term').val() !== '') {
-            
-        //     serarchTerm = $('.search-term').val();
-        //     numRecords = $('.num-records').val();
-            
-        // } else {
-        //     alert('Search term and Number of Records')
-        // }
-        // console.log('search term: ' + serarchTerm);
-        // console.log('number of records: ' + numRecords);
-        // $.getJASON()
 
         console.log($('#searchTerm').val());
         console.log($('#numRecordsSelect').val());   
@@ -29,15 +16,26 @@ $(document).ready(function() {
         console.log(queryURL);
 
         $.getJSON(queryURL).then(function(response) {
-            //create new div to hold each article result
             console.log(response);
-            var newArticleDiv = $('<div>').addClass('article-addition');
+            
             for (var i = 0; i < response.response.docs.length; i++) {
-                var headlineP = $('<p>');
+                //create an empty div to hold new article
+                //and assign it class article-addition
+                var newArticleDiv = $('<div>').addClass('article-addition');
+                //create an empty p tag
+                //and assign it class headline
+                var headlineP = $('<p>').addClass('headline');
+                //store the headline from JSON reply in headline
                 headlineP.html(response.response.docs[i].headline.main);
+                //append the headline p to the new article div
                 newArticleDiv.append(headlineP);
+                //byline p tag
+                var bylineP = $('<p>').addClass('byline');
+                bylineP.html(response.response.docs[i].byline.original);
+                newArticleDiv.append(bylineP);
+                $('.search-results').append(newArticleDiv);
             }
-            $('.search-results').append(newArticleDiv);
+            
         });
     }
 
