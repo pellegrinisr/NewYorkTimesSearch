@@ -13,7 +13,7 @@ $(document).ready(function() {
             searchTerm = $('#searchTerm').val();
             numRecords = $('#numRecordsSelect').val();
             console.log(searchTerm + '   ' + numRecords);
-            
+            //clear the search results div of old items
             $('.search-results').html('');
 
             var numPages = $('#numRecordsSelect').val() / recordsPerPage;
@@ -74,6 +74,6 @@ $(document).ready(function() {
             alert('Search Terms cannot be blank');
         }
     };
-    
+
     $(document).on('click', '.search-button', getSearchTerms);
 });
